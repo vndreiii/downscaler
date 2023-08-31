@@ -33,14 +33,14 @@ class DownscaleApp(QMainWindow):
 
         layout = QVBoxLayout()
 
-        self.input_label = QLabel('Input filename:')
+        self.input_label = QLabel('Choose your video:')
         self.input_dialog = QPushButton("Open File...")
         self.input_dialog.clicked.connect(self.get_file_path)
         layout.addWidget(self.input_label)
         layout.addWidget(self.input_dialog)
 
-        self.output_label = QLabel('Output filename:')
-        self.output_dialog = QPushButton("Choose Folder...")
+        self.output_label = QLabel('Specify the name of the video output:')
+        self.output_dialog = QPushButton("Choose output folder...")
         self.output_dialog.clicked.connect(self.get_folder_path)
         layout.addWidget(self.output_label)
         layout.addWidget(self.output_dialog)
@@ -48,7 +48,7 @@ class DownscaleApp(QMainWindow):
         self.output_text = QLineEdit()
         layout.addWidget(self.output_text)
 
-        self.convert_button = QPushButton('Convert')
+        self.convert_button = QPushButton('Downscale')
         self.convert_button.clicked.connect(self.convert)
         layout.addWidget(self.convert_button)
 
@@ -71,7 +71,7 @@ class DownscaleApp(QMainWindow):
         try:
             ffmpeg.input(input_filename).output(output_filename, vcodec='libx264', crf=28, b='800k', preset='faster',
                                                 tune='film').run()
-            print("Conversion successful!")
+            print("Conversion successful")
         except ffmpeg.Error as e:
             print("An error occurred:", e)
 
